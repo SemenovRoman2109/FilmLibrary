@@ -1,0 +1,38 @@
+{% load static %}
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <title>Document</title>
+  </head>
+  <body>
+    <h2>Фiльми</h2>
+    <div class="film-container" >
+        {% for film in list_films %}
+        <div class="film">
+            <h3>{{ film.name }}</h3>
+            <p>{{ film.year }}</p>
+            <img src="{{ film.image.url }}" alt=""  >
+        </div>
+        {% endfor %}
+    </div>
+    <div class="modal-window">
+        <h2>Дайте вiдгук нашому сайту</h2>
+        <div class="button-close">&Cross;</div>
+        <form method="post" action="{% url 'FilmList' %}" id="sendForm">
+            {% csrf_token %}
+            <input type="text" required placeholder="Ваше iм`я" name="name">
+            <br>
+            <br>
+            <textarea name="content" id="" cols="24" rows="6" placeholder="Ваш вiдгук"></textarea>
+            <br>
+            <br>
+            <button >Вiдправити</button>
+        </form>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js" integrity="sha256-oP6HI9z1XaZNBrJURtCoUT5SUnxFr8s3BzRl+cbzUq8=" crossorigin="anonymous"></script>
+    <script src="{% static 'script.js' %}"></script>
+  </body>
+</html>
